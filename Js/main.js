@@ -1,32 +1,49 @@
- // Definir las notas posibles para las escalas
- const notas = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+function generarEscalaAleatoria() {
+    // Notas musicales posibles
+    const notas = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
+  
+    // Tipo de alteraciones posibles: bemol, sostenido o ninguno
+    const alteraciones = ['b', '#', ''];
+  
+    // Seleccionar una nota aleatoria
+    const notaInicial = notas[Math.floor(Math.random() * notas.length)];
+  
+    // Seleccionar una alteración aleatoria
+    const alteracionInicial = alteraciones[Math.floor(Math.random() * alteraciones.length)];
+  
+    // Construir la primera nota de la escala
+    let notaActual = notaInicial + alteracionInicial;
+  
+    // Crear un array para almacenar la escala
+    const escala = [notaActual];
+  
+    // Definir la secuencia de tonos y semitonos para una escala mayor
+    const secuenciaIntervalos = [2, 2, 1, 2, 2, 2, 1];
+  
+    // Generar las notas restantes de la escala
+    for (let i = 0; i < secuenciaIntervalos.length; i++) {
+      // Obtener el siguiente intervalo de la secuencia
+      const intervalo = secuenciaIntervalos[i];
+  
+      // Calcular la posición de la próxima nota en el array de notas
+      let siguientePosicion = (notas.indexOf(notaActual[0]) + intervalo) % notas.length;
+  
+      // Seleccionar una alteración aleatoria para la próxima nota
+      const siguienteAlteracion = alteraciones[Math.floor(Math.random() * alteraciones.length)];
+  
+      // Construir la próxima nota de la escala
+      notaActual = notas[siguientePosicion] + siguienteAlteracion;
+  
+      // Agregar la nota a la escala
+      escala.push(notaActual);
+    }
+  
+    return escala;
+  }
+  
+  // Ejemplo de uso
+  /* const escalaAleatoria = generarEscalaAleatoria();
+  console.log('Escala Aleatoria:', escalaAleatoria); */
 
- // Función para generar una escala aleatoria
- function generarEscala() {
-     // Seleccionar una nota aleatoria
-     const notaAleatoria = notas[Math.floor(Math.random() * notas.length)];
-
-     // Determinar si la escala será mayor, menor o pentatónica (aleatorio)
-     const tipoEscala = Math.random() < 0.33 ? 'Mayor' : (Math.random() < 0.5 ? 'Menor' : 'Pentatónica');
-
-     // Construir la escala
-     let escala = '';
-     switch (tipoEscala) {
-         case 'Mayor':
-             escala = `${notaAleatoria} Mayor: ${notaAleatoria} ${notas[(notas.indexOf(notaAleatoria) + 2) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 4) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 5) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 7) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 9) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 11) % 7]}`;
-             break;
-         case 'Menor':
-             escala = `${notaAleatoria} Menor: ${notaAleatoria} ${notas[(notas.indexOf(notaAleatoria) + 2) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 3) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 5) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 7) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 8) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 10) % 7]}`;
-             break;
-         case 'Pentatónica':
-             escala = `${notaAleatoria} Pentatónica: ${notaAleatoria} ${notas[(notas.indexOf(notaAleatoria) + 2) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 4) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 7) % 7]} ${notas[(notas.indexOf(notaAleatoria) + 9) % 7]}`;
-             break;
-     }
-
-     // Mostrar la escala generada
-     document.getElementById('scale-display').innerText = escala;
- }
- //////// 
- // RANDOM NOTE 
- ///////
- 
+  const escalaAleatoria = document.getElementById('note-display');
+    escalaAleatoria.innerText = 'Escala Aleatoria: ' + escalaAleatoria.join(', ');
