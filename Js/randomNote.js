@@ -9,7 +9,7 @@ function generarNotas() {
 
     // Validar que el número de notas esté en el rango correcto
     if (isNaN(noteCount) || noteCount < 2 || noteCount > 12) {
-        alert('Ingrese un número válido de notas entre 2 y 12.');
+        alert('Please, enter a number from 2 to 12');
         return;
     }
 
