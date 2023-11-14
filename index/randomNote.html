@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE RANDOM NOTES</title>
+    <!-- LINK CSS -->
+    <link rel="stylesheet" href="../Css/styles.css">
+    <!-- FUENTE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;1,200&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Generador de Notas Aleatorias</h1>
+
+
+    <div id="note-display"></div>
+    <button onclick="generarNotas()">Generar Notas</button>
+    <label for="note-count">Ingrese un número del 2 al 12 para generar una nota aleatoria.</label>
+    <input placeholder="2-12" type="number" id="note-count" min="2" max="12" value="4">
+
+
+    <script src="../Js/randomNote.js"></script>
+</body>
+</html>
