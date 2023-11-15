@@ -61,7 +61,9 @@ function obtenerPatronIntervalos(modo) {
 
 function construirEscala(indiceNotaPrincipal, patronIntervalos) {
   const notasEscala = [notas[indiceNotaPrincipal]];
+
   let indiceActual = indiceNotaPrincipal;
+
 
   for (const intervalo of patronIntervalos) {
     if (intervalo === 'T') {
@@ -75,3 +77,4 @@ function construirEscala(indiceNotaPrincipal, patronIntervalos) {
 
   return notasEscala;
 }
+
