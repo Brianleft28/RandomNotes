@@ -33,12 +33,10 @@ function generarEscala() {
 }
 
 function mostrarResultados(notaPrincipal, modoGriego, notasEscala) {
-  document.getElementById('notaPrincipal').textContent = ``;
-  document.getElementById('modoGriego').textContent = `Nota Principal: ${notaPrincipal}`;
+  document.getElementById('notaPrincipal').textContent = `Nota Principal: ${notaPrincipal}`;
+  document.getElementById('modoGriego').textContent = `Modo Griego: ${modoGriego}`;
   document.getElementById('notasEscala').textContent = `Notas de la Escala: ${notasEscala.join(', ')}`;
 }
-// </p>
-// 
 
 function obtenerPatronIntervalos(modo) {
   switch (modo.toLowerCase()) {
