@@ -71,10 +71,13 @@ function construirEscala(indiceNotaPrincipal, patronIntervalos) {
     } else if (intervalo === 'S') {
       indiceActual = (indiceActual + 1) % notas.length;
     }
-
+// asdasd asegurrar cambio push
     notasEscala.push(notas[indiceActual]);
   }
 
   return notasEscala;
 }
 
+function sumar () {
+  
+}
