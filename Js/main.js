@@ -1,49 +1,79 @@
-function generarEscalaAleatoria() {
-    // Notas musicales posibles
-    const notas = ['C', 'D', 'E', 'F', 'G', 'A', 'B'];
-  
-    // Tipo de alteraciones posibles: bemol, sostenido o ninguno
-    const alteraciones = ['b', '#', ''];
-  
-    // Seleccionar una nota aleatoria
-    const notaInicial = notas[Math.floor(Math.random() * notas.length)];
-  
-    // Seleccionar una alteración aleatoria
-    const alteracionInicial = alteraciones[Math.floor(Math.random() * alteraciones.length)];
-  
-    // Construir la primera nota de la escala
-    let notaActual = notaInicial + alteracionInicial;
-  
-    // Crear un array para almacenar la escala
-    const escala = [notaActual];
-  
-    // Definir la secuencia de tonos y semitonos para una escala mayor
-    const secuenciaIntervalos = [2, 2, 1, 2, 2, 2, 1];
-  
-    // Generar las notas restantes de la escala
-    for (let i = 0; i < secuenciaIntervalos.length; i++) {
-      // Obtener el siguiente intervalo de la secuencia
-      const intervalo = secuenciaIntervalos[i];
-  
-      // Calcular la posición de la próxima nota en el array de notas
-      let siguientePosicion = (notas.indexOf(notaActual[0]) + intervalo) % notas.length;
-  
-      // Seleccionar una alteración aleatoria para la próxima nota
-      const siguienteAlteracion = alteraciones[Math.floor(Math.random() * alteraciones.length)];
-  
-      // Construir la próxima nota de la escala
-      notaActual = notas[siguientePosicion] + siguienteAlteracion;
-  
-      // Agregar la nota a la escala
-      escala.push(notaActual);
-    }
-  
-    return escala;
-  }
-  
-  // Ejemplo de uso
-  /* const escalaAleatoria = generarEscalaAleatoria();
-  console.log('Escala Aleatoria:', escalaAleatoria); */
+const notas = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const modosGriegos = ['Jonico', 'Dorico', 'Frigio', 'Lidio', 'Mixolidio', 'Eolico', 'Locrio'];
 
-  const escalaAleatoria = document.getElementById('note-display');
-    escalaAleatoria.innerText = 'Escala Aleatoria: ' + escalaAleatoria.join(', ');
+function generarEscalaAleatoria() {
+  const notaPrincipal = notas[Math.floor(Math.random() * notas.length)];
+  const modoGriego = modosGriegos[Math.floor(Math.random() * modosGriegos.length)];
+  const indiceNotaPrincipal = notas.indexOf(notaPrincipal);
+
+  const notasEscala = construirEscala(indiceNotaPrincipal, obtenerPatronIntervalos(modoGriego));
+
+  mostrarResultados(notaPrincipal, modoGriego, notasEscala);
+}
+
+function generarEscalaPorModo(modo) {
+  const notaPrincipal = notas[Math.floor(Math.random() * notas.length)];
+  const indiceNotaPrincipal = notas.indexOf(notaPrincipal);
+  const patronIntervalos = obtenerPatronIntervalos(modo);
+
+  const notasEscala = construirEscala(indiceNotaPrincipal, patronIntervalos);
+
+  mostrarResultados(notaPrincipal, modo, notasEscala);
+}
+
+function generarEscala() {
+  const modoSelector = document.getElementById('modoSelector');
+  const modoSeleccionado = modoSelector.value;
+
+  if (modoSeleccionado === 'aleatorio') {
+    generarEscalaAleatoria();
+  } else {
+    generarEscalaPorModo(modoSeleccionado);
+  }
+}
+
+function mostrarResultados(notaPrincipal, modoGriego, notasEscala) {
+  document.getElementById('notaPrincipal').textContent = ``;
+  document.getElementById('modoGriego').textContent = `Nota Principal: ${notaPrincipal}`;
+  document.getElementById('notasEscala').textContent = `Notas de la Escala: ${notasEscala.join(', ')}`;
+}
+// </p>
+// 
+
+function obtenerPatronIntervalos(modo) {
+  switch (modo.toLowerCase()) {
+    case 'jonico':
+      return ['T', 'T', 'S', 'T', 'T', 'T', 'S'];
+    case 'dorico':
+      return ['T', 'S', 'T', 'T', 'T', 'S', 'T'];
+    case 'frigio':
+      return ['S', 'T', 'T', 'T', 'S', 'T', 'T'];
+    case 'lidio':
+      return ['T', 'T', 'T', 'S', 'T', 'T', 'S'];
+    case 'mixolidio':
+      return ['T', 'T', 'S', 'T', 'T', 'S', 'T'];
+    case 'eolico':
+      return ['T', 'S', 'T', 'T', 'S', 'T', 'T'];
+    case 'locrio':
+      return ['S', 'T', 'T', 'S', 'T', 'T', 'T'];
+    default:
+      return ['T', 'T', 'S', 'T', 'T', 'T', 'S'];
+  }
+}
+
+function construirEscala(indiceNotaPrincipal, patronIntervalos) {
+  const notasEscala = [notas[indiceNotaPrincipal]];
+  let indiceActual = indiceNotaPrincipal;
+
+  for (const intervalo of patronIntervalos) {
+    if (intervalo === 'T') {
+      indiceActual = (indiceActual + 2) % notas.length;
+    } else if (intervalo === 'S') {
+      indiceActual = (indiceActual + 1) % notas.length;
+    }
+
+    notasEscala.push(notas[indiceActual]);
+  }
+
+  return notasEscala;
+}

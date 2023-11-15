@@ -1,37 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE RANDOM NOTES</title>
-    <!-- LINK CSS -->
-    <!-- bt5 -->
-     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../Css/styles.css">
-
-    <!-- FUENTE -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;1,200&display=swap" rel="stylesheet">
-        <!-- font -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Escalas Musicales</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../Css/styles.css">
 </head>
 <body>
-<main>
+<h1>Generador de Escalas Musicales</h1>
 
-
-<div class="container">
-    <h1>
-        RANDOM SCALE
-    </h1>
-    <div id="scale-display"></div>
-    <button onclick="generarEscala()">Scale Generator</button>
-    <div class="atras">
-
-        <a href="/index.html"><i class="fa-solid fa-angles-left" style="color: #ffffff;"></i>Forward</a>
-    </div>
+<div id="result">
+    <h2>Resultado:</h2>
+    <p class="notaprincpal" id="notaPrincipal"></p>
+    <p class="modogriego" id="modoGriego"></p>
+    <p  class="notasescala" id="notasEscala"></p>
 </div>
-<script src="../Js/main.js"></script>
+
+<p style="p{background-color: white; color: black;}">`Nota Principal: ${notaPrincipal}`</p>
+
+<div class="d-flex">
+    <button onclick="generarEscala()">Generar Escala</button>
+<select id="modoSelector">
+  <option value="aleatorio">Aleatorio</option>
+  <option value="jonico">Jónico</option>
+  <option value="dorico">Dórico</option>
+  <option value="frigio">Frigio</option>
+  <option value="lidio">Lidio</option>
+  <option value="mixolidio">Mixolidio</option>
+  <option value="eolico">Eólico</option>
+  <option value="locrio">Locrio</option>
+</select> 
+</div>
+<script src="../Js/main.js">
+ 
+</script>
+
 </body>
-</main>
 </html>
