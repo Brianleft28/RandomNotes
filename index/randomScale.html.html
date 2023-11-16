@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Escalas Musicales</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+      background-color: black;
+      color: white;
+    }
+
+    select {
+      margin-top: 10px;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+
+    #acordes {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Generador de Escalas Musicales</h1>
+
+<form>
+  <label for="notaSelector">Selecciona la Nota Fundamental:</label>
+  <select id="notaSelector">
+    <option value="aleatorio">Aleatorio</option>
+    <option value="C">C</option>
+    <option value="C#">C#</option>
+    <option value="D">D</option>
+    <option value="D#">D#</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="F#">F#</option>
+    <option value="G">G</option>
+    <option value="G#">G#</option>
+    <option value="A">A</option>
+    <option value="A#">A#</option>
+    <option value="B">B</option>
+  </select>
+
+  <br>
+
+  <label for="modoSelector">Selecciona el Modo:</label>
+  <select id="modoSelector">
+    <option value="aleatorio">Aleatorio</option>
+    <option value="jonico">Jónico</option>
+    <option value="dorico">Dórico</option>
+    <option value="frigio">Frigio</option>
+    <option value="lidio">Lidio</option>
+    <option value="mixolidio">Mixolidio</option>
+    <option value="eolico">Eólico</option>
+    <option value="locrio">Locrio</option>
+  </select>
+
+  <button type="button" onclick="generarEscala()">Generar Escala</button>
+</form>
+
+<div id="result">
+  <h2>Resultado:</h2>
+  <p id="notaPrincipal"></p>
+  <p id="modoGriego"></p>
+ 
+  <p id="notasEscala"></p>
+</div>
+
+<div id="acordes">
+  <h2>Grados de la Escala:</h2>
+  <p id="gradosEscala"></p>
+</div>
+<p>Si elegís un modo aleatorio, se va a generar un aleatorio pero no se mostrará el nombre del modo.</p>
+<p style="font-size: 30px;">:(</p>
+
+
+
+<script>
+  const notas = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+  const modosGriegos = ['Jonico', 'Dorico', 'Frigio', 'Lidio', 'Mixolidio', 'Eolico', 'Locrio'];
+  
+  function generarEscalaAleatoria() {
+  const notaSelector = document.getElementById('notaSelector');
+  const notaPrincipal = notaSelector.value === 'aleatorio' ?
+    notas[Math.floor(Math.random() * notas.length)] :
+    notaSelector.value;
+
+  const modoSelector = document.getElementById('modoSelector');
+  const modoGriegoAleatorio = modoSelector.value === `$[modoAleatorio]` ?
+    modosGriegos[Math.floor(Math.random() * modosGriegos.length)] :
+    modoSelector.value;
+
+  const indiceNotaPrincipal = notas.indexOf(notaPrincipal);
+  const notasEscala = construirEscala(indiceNotaPrincipal, obtenerPatronIntervalos(modoGriegoAleatorio));
+  const gradosEscala = construirGradosEscala(notasEscala);
+
+  // Muestra el nombre del modo griego en el display
+  document.getElementById('modoGriego').textContent = `Modo Griego: ${modoGriegoAleatorio}`;
+  
+  // Llama a la función mostrarResultados con el modo griego aleatorio
+  mostrarResultados(notaPrincipal, modoGriegoAleatorio, notasEscala, gradosEscala);
+}
+
+  function generarEscalaPorModo(modo) {
+    const notaPrincipal = document.getElementById('notaSelector').value;
+    const indiceNotaPrincipal = notas.indexOf(notaPrincipal);
+    const patronIntervalos = obtenerPatronIntervalos(modo);
+    const notasEscala = construirEscala(indiceNotaPrincipal, patronIntervalos);
+    const gradosEscala = construirGradosEscala(notasEscala);
+
+    mostrarResultados(notaPrincipal, modo, notasEscala, gradosEscala);
+  }
+
+  function generarEscala() {
+    const modoSelector = document.getElementById('modoSelector');
+    const modoSeleccionado = modoSelector.value;
+
+    if (document.getElementById('notaSelector').value === 'aleatorio') {
+      generarEscalaAleatoria();
+    } else {
+      generarEscalaPorModo(modoSeleccionado);
+    }
+
+  }
+  function mostrarResultados(notaPrincipal, modoGriego, notasEscala, gradosEscala) {
+  document.getElementById('notaPrincipal').textContent = `Nota Principal: ${notaPrincipal}`;
+  // Muestra el nombre del modo griego en el display
+  document.getElementById('modoGriego').textContent = `Modo Griego: ${modoGriego}`;
+  document.getElementById('notasEscala').textContent = `Notas de la Escala: ${notasEscala.join(', ')}`;
+  document.getElementById('gradosEscala').innerHTML = `<strong>Grados de la Escala:</strong><br>${gradosEscala.join('<br>')}`;
+}
+  function obtenerPatronIntervalos(modo) {
+    switch (modo.toLowerCase()) {
+      case 'jonico':
+        return ['T', 'T', 'S', 'T', 'T', 'T', 'S'];
+      case 'dorico':
+        return ['T', 'S', 'T', 'T', 'T', 'S', 'T'];
+      case 'frigio':
+        return ['S', 'T', 'T', 'T', 'S', 'T', 'T'];
+      case 'lidio':
+        return ['T', 'T', 'T', 'S', 'T', 'T', 'S'];
+      case 'mixolidio':
+        return ['T', 'T', 'S', 'T', 'T', 'S', 'T'];
+      case 'eolico':
+        return ['T', 'S', 'T', 'T', 'S', 'T', 'T'];
+      case 'locrio':
+        return ['S', 'T', 'T', 'S', 'T', 'T', 'T'];
+        case 'aleatorio':
+      // Obtener un modo griego al azar
+      const modoAleatorio = modosGriegos[Math.floor(Math.random() * modosGriegos.length)];
+      return obtenerPatronIntervalos(modoAleatorio);
+    default:
+      // Cambié el valor predeterminado por aleatorio
+      return obtenerPatronIntervalos(`$[modoAleatorio]`);
+    }
+  }
+
+  function construirEscala(indiceNotaPrincipal, patronIntervalos) {
+    const notasEscala = [notas[indiceNotaPrincipal]];
+    let indiceActual = indiceNotaPrincipal;
+
+    for (const intervalo of patronIntervalos) {
+      if (intervalo === 'T') {
+        indiceActual = (indiceActual + 2) % notas.length;
+      } else if (intervalo === 'S') {
+        indiceActual = (indiceActual + 1) % notas.length;
+      }
+
+      notasEscala.push(notas[indiceActual]);
+    }
+
+    return notasEscala;
+  }
+
+  function construirGradosEscala(notasEscala) {
+    const gradosEscala = [];
+
+    for (let i = 0; i < notasEscala.length; i++) {
+      const grado = `${i + 1}°`;
+      const tipoAcorde = i === 2 || i === 5 ? 'menor' : (i === 6 ? 'disminuido' : 'mayor');
+      const notaFundamental = notasEscala[i];
+      gradosEscala.push(`${grado}: ${tipoAcorde} (${notaFundamental})`);
+    }
+
+    return gradosEscala;
+  }
+</script>
+
+</body>
+</html>
