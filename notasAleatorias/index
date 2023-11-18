@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Página Principal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: black; /* Fondo negro */
+      color: white; /* Texto blanco */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh; /* Ajusta el contenido al 100% de la altura de la pantalla */
+      margin: 0;
+    }
+
+    h1 {
+      color: #3498db; /* Color azul */
+    }
+
+    h2 {
+      color: #e74c3c; /* Color rojo */
+      cursor: pointer; /* Cambia el cursor al pasar sobre el título */
+    }
+  </style>
+</head>
+<body>
+  <h1>Mi Título Principal</h1>
+
+  <h2 onclick="irAModosGriegos()">Modos Griegos</h2>
+  <h2 onclick="irANotasAleatorias()">Notas Aleatorias</h2>
+
+  <script>
+    function irAModosGriegos() {
+      window.location.href = 'modosGriegos/modosGriegos.html';
+    }
+
+    function irANotasAleatorias() {
+      window.location.href = 'notasAleatorias/notasAleatorias.html';
+    }
+  </script>
+</body>
+</html>

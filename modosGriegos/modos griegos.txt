@@ -1,0 +1,62 @@
+jonico: 
+0 mayor 
+1 menor 
+2 menor 
+3 mayor 
+4 mayor 
+5 menor 
+6 disminuido 
+
+dorico: 
+0 menor 
+1 menor 
+2 mayor 
+3 mayor 
+4 menor 
+5 disminuido 
+6 mayor 
+
+frigio: 
+0 menor 
+1 mayor 
+2 mayor 
+3 menor 
+4 disminuido 
+5 mayor 
+6 menor 
+
+lidio: 
+0 mayor 
+1 mayor 
+2 menor 
+3 disminuido 
+4 mayor 
+5 menor 
+6 menor 
+
+mixolidio: 
+0 mayor 
+1 menor 
+2 disminuido 
+3 mayor 
+4 menor 
+5 menor 
+6 mayor 
+
+eolico: 
+0 menor 
+1 disminuido 
+2 mayor 
+3 menor 
+4 menor
+5 mayor
+6 mayor
+
+locrio: 
+0 disminuido 
+1 mayor 
+2 menor 
+3 menor 
+4 mayor 
+5 mayor 
+6 menor 
